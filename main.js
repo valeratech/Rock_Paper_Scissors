@@ -52,18 +52,15 @@ function playRound(computerSelection, playerSelection) {
     }
 };
 
-// Assign selection from the computer and player to variables
-
-
-let round = 1;
-while (true) {
-    computer = computerPlay();
-    player = playerPlay();
-    announceSelect(computer, player, round);
-    alert(playRound(computer, player));
-    round++;
-
+function game() {
+    let round = 1;
+    while (round < 6) {
+        computer = computerPlay();
+        player = playerPlay();
+        announceSelect(computer, player, round);
+        alert(playRound(computer, player));
+        round++;
+    }
 };
 
-
-
+game()
