@@ -11,23 +11,59 @@ function playerPlay() {
     return playerChoice;
 };
 
-function announceSelect(compFunc, playFunc) {
+function announceSelect(compFunc, playFunc, round) {
+    myRound = round.toString();
+    alert(`ROUND ${myRound}.... FIGHT!!!`);
     alert(`Computer chooses ${compFunc.toUpperCase()}`);
     alert(`Player chooses ${playFunc.toUpperCase()}`);
-}
+};
 
-// function game(compFunc, playFunc) {
-//     // console.log(compFunc, playFunc);
-//
-// //     if (compFunc === playFunc) {
-// //         alert
-// //     }
-// };
+function getScore(c,p) {
+    pscore = p + 5;
+    cscore = c + 5;
+    if (pscore === 5) {
+        alert(`GAME OVER: PLAYER HAS WON THE MATCH`);
+        return false;
+    } else if (pscore === 5) {
+        alert("GAME OVER: PLAYER HAS WON THE MATCH");
+        return false;
+    } else {
+        true;
+    }
+};
+
+function playRound(computerSelection, playerSelection) {
+    console.log(computerSelection, playerSelection);
+
+    if (computerSelection === 'rock' && playerSelection === 'scissors') {
+        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+    } else if (computerSelection === 'rock' && playerSelection === 'paper') {
+        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+    } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
+        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+    } else if (computerSelection === 'paper' && playerSelection === 'rock') {
+        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+    } else if (computerSelection === 'scissors' && playerSelection === 'rock') {
+        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+    } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
+        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+    } else {
+        return "TIE";
+    }
+};
 
 // Assign selection from the computer and player to variables
-computer = computerPlay()
-player = playerPlay()
-announceSelect(computer, player);
+
+
+let round = 1;
+while (true) {
+    computer = computerPlay();
+    player = playerPlay();
+    announceSelect(computer, player, round);
+    alert(playRound(computer, player));
+    round++;
+
+};
 
 
 
