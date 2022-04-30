@@ -18,17 +18,17 @@ function announceSelect(compFunc, playFunc, round) {
     alert(`Player chooses ${playFunc.toUpperCase()}`);
 };
 
-function getScore(c,p) {
-    pscore = p + 5;
-    cscore = c + 5;
-    if (pscore === 5) {
-        alert(`GAME OVER: PLAYER HAS WON THE MATCH`);
-        return false;
-    } else if (pscore === 5) {
-        alert("GAME OVER: PLAYER HAS WON THE MATCH");
-        return false;
+function getScore(result, start) {
+    console.log(`From getscore function: ${start}`)
+    let [pscore, cscore] = start;
+    if (result.includes("PLAYER WINS")) {
+        pscore++;
+        return [pscore,cscore];
+    } else if (result.includes("COMPUTER WINS")) {
+        cscore++;
+        return [pscore,cscore];
     } else {
-        true;
+        return [pscore,cscore];
     }
 };
 
@@ -53,14 +53,19 @@ function playRound(computerSelection, playerSelection) {
 };
 
 function game() {
+    gameScore = [0,0];
     let round = 1;
     while (round < 6) {
         computer = computerPlay();
         player = playerPlay();
         announceSelect(computer, player, round);
-        alert(playRound(computer, player));
+        gameResult = playRound(computer, player);
+        alert(gameResult);
         round++;
+        gameScore = getScore(gameResult, gameScore);
+        alert(gameScore);
     }
+    return gameScore;
 };
 
-game()
+game();
