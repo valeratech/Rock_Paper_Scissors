@@ -11,14 +11,23 @@ function playerPlay() {
     return playerChoice;
 };
 
-function game(compFunc, playFunc) {
-    // console.log(compFunc, playFunc);
-    alert(`Computer chooses ${compFunc}`);
-    alert(`Player chooses${playFunc}`);
-//     if (compFunc === playFunc) {
-//         alert
-//     }
-};
+function announceSelect(compFunc, playFunc) {
+    alert(`Computer chooses ${compFunc.toUpperCase()}`);
+    alert(`Player chooses ${playFunc.toUpperCase()}`);
+}
 
-game(computerPlay(), playerPlay());
+// function game(compFunc, playFunc) {
+//     // console.log(compFunc, playFunc);
+//
+// //     if (compFunc === playFunc) {
+// //         alert
+// //     }
+// };
+
+// Assign selection from the computer and player to variables
+computer = computerPlay()
+player = playerPlay()
+announceSelect(computer, player);
+
+
 
