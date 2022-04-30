@@ -12,8 +12,13 @@ function playerPlay() {
 };
 
 function game(compFunc, playFunc) {
-    console.log(compFunc, playFunc);
-
+    // console.log(compFunc, playFunc);
+    alert(`Computer chooses ${compFunc}`);
+    alert(`Player chooses${playFunc}`);
+//     if (compFunc === playFunc) {
+//         alert
+//     }
 };
 
 game(computerPlay(), playerPlay());
+
