@@ -52,6 +52,18 @@ function playRound(computerSelection, playerSelection) {
     }
 };
 
+function getFinal(score) {
+    let playerFinal = score[0]
+    let computerFinal = score[1]
+    if (playerFinal < computerFinal) {
+        return `COMPUTER WINS! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`;
+    } else if (playerFinal > computerFinal) {
+        return `COMPUTER WINS! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`;
+    } else {
+        return `TIE! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`
+    }
+};
+
 function game() {
     gameScore = [0,0];
     let round = 1;
@@ -63,9 +75,10 @@ function game() {
         alert(gameResult);
         round++;
         gameScore = getScore(gameResult, gameScore);
-        alert(gameScore);
+        alert(`Player Score: Player: ${gameScore[0]} | Computer: ${gameScore[1]}`);
     }
     return gameScore;
 };
 
-game();
+final = game();
+alert(getFinal(final));
