@@ -20,7 +20,10 @@ function announceSelect(compFunc, playFunc, round) {
 
 function getScore(result, start) {
     console.log(`From getscore function: ${start}`)
+    // Unpacks the array from the game function's starting score [0,0] and assings it to pscore/cscore
     let [pscore, cscore] = start;
+    // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
+    // Then increments each bby either 1 unless it results in a TIE
     if (result.includes("PLAYER WINS")) {
         pscore++;
         return [pscore,cscore];
@@ -65,15 +68,19 @@ function getFinal(score) {
 };
 
 function game() {
+    // gameScore sets the beginning value of each score for player and computer to 0
     gameScore = [0,0];
     let round = 1;
     while (round < 6) {
+        // Sets the return value of computerPlay and playerPlay which returns each's selection
         computer = computerPlay();
         player = playerPlay();
+        // Uses the announceSelect function to announce the computer and players selection and keeps track of the round
         announceSelect(computer, player, round);
         gameResult = playRound(computer, player);
         alert(gameResult);
         round++;
+        // gameScore keeps track of the score within an array
         gameScore = getScore(gameResult, gameScore);
         alert(`Player Score: Player: ${gameScore[0]} | Computer: ${gameScore[1]}`);
     }
