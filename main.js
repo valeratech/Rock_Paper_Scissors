@@ -5,9 +5,7 @@ function computerPlay() {
     let random = Math.floor(Math.random() * typeList.length);
     img = document.createElement('img');
     cbox = document.querySelector('.cbox')
-    console.log(typeList[random]);
-    console.log(cbox);
-    console.log(img);
+
     if (typeList[random].toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -30,9 +28,7 @@ function computerPlay() {
 function playerPlay(selection) {
     img = document.createElement('img');
     pbox = document.querySelector('.pbox')
-    console.log(selection);
-    console.log(pbox);
-    console.log(img);
+
     if (selection.toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -49,12 +45,11 @@ function playerPlay(selection) {
         img.alt = 'A pair of scissors';
         pbox.appendChild(img);
     }
-    return selection;
+    // return selection.toLowerCase(); // may not be needed
 };
 
 function announceSelect(pSelect, cSelect) {
     let gameMessage = document.querySelector('.info');
-    let header = document.querySelectorAll('.info h3');
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
     };
@@ -63,25 +58,8 @@ function announceSelect(pSelect, cSelect) {
     gameMessage.innerHTML = chooseText;
 };
 
-function getScore(result, start) {
-    console.log(`From getscore function: ${start}`)
-    // Unpacks the array from the game function's starting score [0,0] and assings it to pscore/cscore
-    let [pscore, cscore] = start;
-    // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
-    // Then increments each bby either 1 unless it results in a TIE
-    if (result.includes("PLAYER WINS")) {
-        pscore++;
-        return [pscore,cscore];
-    } else if (result.includes("COMPUTER WINS")) {
-        cscore++;
-        return [pscore,cscore];
-    } else {
-        return [pscore,cscore];
-    }
-};
-
 function playRound(computerSelection, playerSelection) {
-    // console.log(computerSelection, playerSelection);
+    console.log(computerSelection, playerSelection);
 
     if (computerSelection === 'rock' && playerSelection === 'scissors') {
         return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
@@ -100,6 +78,28 @@ function playRound(computerSelection, playerSelection) {
     }
 };
 
+function getScore(result, start) {
+    console.log(`From getscore function: ${result}, ${start}`)
+    // Unpacks the array from the game function's starting score [0,0] and assignss it to pscore/cscore
+    let [pscore, cscore] = start;
+    // console.log(pscore);
+    // console.log(cscore);
+    // console.log(result);
+    // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
+    // Then increments each bby either 1 unless it results in a TIE
+    if (result.includes("PLAYER WINS")) {
+        pscore++;
+        console.log(pscore);
+        return [pscore,cscore];
+    } else if (result.includes("COMPUTER WINS")) {
+        cscore++;
+        console.log(cscore);
+        return [pscore,cscore];
+    } else {
+        return [pscore,cscore];
+    }
+};
+
 function getFinal(score) {
     let playerFinal = score[0]
     let computerFinal = score[1]
@@ -113,30 +113,31 @@ function getFinal(score) {
 };
 
 function game() {
-    let gameMessage = document.querySelector('.info h3');
+    let gameMessage = document.querySelector('.info');
+    while (gameMessage.firstChild) {
+        gameMessage.removeChild(gameMessage.firstChild);
+    };
     let chooseText = `<h3>Round X</h3>
         <h3>FIGHT!</h3>`;
     gameMessage.innerHTML = chooseText;
     let buttons = document.querySelectorAll(".button");
     let gameScore = [0, 0];
+    // img = document.createElement('img');
+    // pbox = document.querySelector('.pbox');
+    // cbox = document.querySelector('.cbox');
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
 
-            let playerSelection = button.textContent;
-            // console.log(playerSelection);
+            let playerSelection = (button.textContent).toLowerCase();
             let computerSelection = computerPlay();
-            // console.log(computerSelection);
             playerPlay(playerSelection);
             gameResult = playRound(playerSelection, computerSelection);
-            console.log(gameResult);
             announceSelect(playerSelection, computerSelection);
             // gameScore keeps track of the score within an array
-            // gameScore = getScore(gameResult, gameScore);
-            console.log(`Player Score: Player: ${gameScore[0]} | Computer: ${gameScore[1]}`);
-
-
-
+            gameScore = getScore(gameResult, gameScore);
+            console.log(gameScore);
+            getFinal()
         });
     });
 };
