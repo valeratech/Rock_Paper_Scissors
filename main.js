@@ -48,7 +48,6 @@ function playerPlay(selection) {
         img.alt = 'A pair of scissors';
         pbox.appendChild(img);
     }
-    // return selection.toLowerCase(); // may not be needed
 };
 
 function announceSelect(pSelect, cSelect) {
@@ -106,11 +105,16 @@ function getScore(result, start) {
 function getFinal(score) {
     let playerFinal = score[0]
     let computerFinal = score[1]
+    let scoreBoard = document.querySelector('.ticker');
+    scoreBoard.removeChild(scoreBoard.firstChild);
     if (playerFinal < computerFinal) {
+        scoreBoard.innerHTML = `<h2>PLAYER WINS!!! Score: Player: ${playerFinal} | Computer: ${computerFinal}</h2>`;
         return `COMPUTER WINS! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`;
     } else if (playerFinal > computerFinal) {
+        scoreBoard.innerHTML = `<h2>COMPUTER WINS!!! Score: Player: ${playerFinal} | Computer: ${computerFinal}</h2>`;
         return `COMPUTER WINS! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`;
     } else {
+        scoreBoard.innerHTML = `<h2>TIE!!! Score: Player: ${playerFinal} | Computer: ${computerFinal}</h2>`;
         return `TIE! Final Score: Player: ${playerFinal} | Computer: ${computerFinal}`
     }
 };
@@ -147,7 +151,8 @@ function game() {
             // gameScore keeps track of the score within an array
             gameScore = getScore(gameResult, gameScore);
             console.log(gameScore);
-            // getFinal()
+            final = getFinal(gameScore);
+            console.log(final);
         });
     });
 };
