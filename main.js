@@ -80,7 +80,7 @@ function playRound(computerSelection, playerSelection) {
     }
 };
 
-function getScore(result, start) {
+function tallyScore(result, start) {
     console.log(`From getscore function: ${result}, ${start}`)
     // Unpacks the array from the game function's starting score [0,0] and assignss it to pscore/cscore
     let [pscore, cscore] = start;
@@ -102,7 +102,7 @@ function getScore(result, start) {
     }
 };
 
-function getFinal(score) {
+function getScore(score) {
     let playerFinal = score[0]
     let computerFinal = score[1]
     let scoreBoard = document.querySelector('.ticker');
@@ -149,10 +149,10 @@ function game() {
             gameResult = playRound(playerSelection, computerSelection);
             announceSelect(playerSelection, computerSelection);
             // gameScore keeps track of the score within an array
-            gameScore = getScore(gameResult, gameScore);
-            console.log(gameScore);
-            final = getFinal(gameScore);
-            console.log(final);
+            gameScore = tallyScore(gameResult, gameScore);
+            // console.log(gameScore);
+            score = getScore(gameScore);
+            // console.log(final);
         });
     });
 };

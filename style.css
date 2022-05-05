@@ -57,7 +57,23 @@ footer p {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: black;
+    text-shadow:0px 0px 2px white,
+    0px 0px 20px white,
+    0px 0px 5px black;
+
 }
+
+.ticker h2 {
+    font-size: 48px;
+}
+
+.ticker p {
+    font-size: 20px;
+    text-align: end;
+    padding: 10px;
+}
+
 
 .play {
     display: flex;
@@ -93,14 +109,6 @@ h3 {
     text-shadow:0px 0px 2px black,
     0px 0px 20px black,
     0px 0px 10px white;
-}
-
-.ticker h2 {
-    font-size: 48px;
-    color: black;
-    text-shadow:0px 0px 2px white,
-    0px 0px 20px white,
-    0px 0px 5px black;
 }
 
 .pbox, .cbox {
@@ -200,7 +208,6 @@ button:focus::after {
     object-fit: cover;
     border-radius: 25px;
 }
-
 
 a:link {
     text-decoration: none;
