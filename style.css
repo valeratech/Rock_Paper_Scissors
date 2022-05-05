@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /*border: solid;*/
+    border: solid;
 }
 
 :root {
@@ -84,7 +84,14 @@ footer p {
     justify-content: center;
     flex-wrap: wrap;
     padding: 25px;
-
+}
+h4 {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-shadow:0px 0px 2px black,
+    0px 0px 20px black,
+    0px 0px 10px white;
 }
 
 h3 {
