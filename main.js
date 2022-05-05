@@ -28,7 +28,10 @@ function computerPlay() {
 function playerPlay(selection) {
     img = document.createElement('img');
     pbox = document.querySelector('.pbox')
-
+    if (pbox.firstChild) {
+        pbox.removeChild(pbox.firstChild);
+        cbox.removeChild(cbox.firstChild);
+    };
     if (selection.toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -113,10 +116,17 @@ function getFinal(score) {
 };
 
 function game() {
+    pbox = document.querySelector('.pbox')
+    cbox = document.querySelector('.cbox')
+    if (pbox.firstChild) {
+        pbox.removeChild(pbox.firstChild);
+        cbox.removeChild(cbox.firstChild);
+    };
     let gameMessage = document.querySelector('.info');
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
     };
+
     let chooseText = `<h3>Round X</h3>
         <h3>FIGHT!</h3>`;
     gameMessage.innerHTML = chooseText;
@@ -137,7 +147,7 @@ function game() {
             // gameScore keeps track of the score within an array
             gameScore = getScore(gameResult, gameScore);
             console.log(gameScore);
-            getFinal()
+            // getFinal()
         });
     });
 };

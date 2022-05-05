@@ -2,14 +2,15 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: solid;
+    /*border: solid;*/
 }
 
 :root {
     --clr-neon: hsl(144, 100%, 54%);
     --clr-bg: hsl(323 21% 16%);
     --clr-retro: hsl(322, 100%, 50%);
-
+    /*--clr-neon: hsl(144, 100%, 54%);*/
+    /*--clr-neon: hsl(144, 100%, 54%);*/
 }
 
 body {
@@ -25,16 +26,6 @@ header {
     height: 820px;
 }
 
-header a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 26px;
-    font-weight: bold;
-    font-size: 36px;
-    letter-spacing: 1.3px;
-    color: var(--clr-retro);
-    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 .16em currentColor;
-}
 
 h1 {
     font-size: 72px;
@@ -208,4 +199,41 @@ button:focus::after {
     width: 100%;
     object-fit: cover;
     border-radius: 25px;
+}
+
+
+a:link {
+    text-decoration: none;
+    text-outline: white;
+    display: inline-block;
+    padding: 26px;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: 1.3px;
+    color: var(--clr-retro);
+    text-shadow: -1px 1px 2px #000000,
+    1px 1px 2px #ffffff,
+    1px -1px 0 #ffffff,
+    -1px -1px 0 #ffffff;
+
+}
+
+/*a:link {*/
+/*    text-decoration: none;*/
+/*    color: #F9FAF8;*/
+/*}*/
+
+a:visited {
+    text-decoration: none;
+    color: var(--clr-retro);
+}
+
+a:focus {
+    text-decoration: none;
+    color: var(--clr-retro);
+}
+
+a:hover {
+    text-decoration: none;
+    color: #880aff;
 }
