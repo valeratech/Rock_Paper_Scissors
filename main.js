@@ -28,7 +28,6 @@ function computerPlay() {
         cbox.style.borderColor = 'var(--clr-highlight)';
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
-    console.log(`COMP: ${typeList[random].toLowerCase()}`)
     return typeList[random].toLowerCase();
 };
 
@@ -61,7 +60,6 @@ function playerPlay(selection) {
         pbox.style.borderColor = 'var(--clr-highlight)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
-    console.log(`PLAY: ${selection}`)
 };
 
 function announceSelect(pSelect, cSelect) {
@@ -75,7 +73,6 @@ function announceSelect(pSelect, cSelect) {
 };
 
 function playRound(playerSelection, computerSelection) {
-    console.log(`Computer: ${computerSelection} Player: ${playerSelection}`)
     if (computerSelection === 'rock' && playerSelection === 'scissors') {
         return `COMPUTER`;
     } else if (computerSelection === 'rock' && playerSelection === 'paper') {
@@ -99,7 +96,6 @@ function tallyScore(result, start) {
     let scoreBoard = document.querySelector('.ticker');
     // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
     // Then increments each bby either 1 unless it results in a TIE
-    console.log(result);
     if (result === "PLAYER") {
         pscore++;
         scoreBoard.innerHTML = `<h2>PLAYER WINS!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
@@ -118,22 +114,34 @@ function checkWinner(score) {
     let [pscore, cscore] = score;
     let scoreBoard = document.querySelector('.ticker');
     let buttons = document.querySelectorAll(".button");
+
     if (pscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! Player Wins!!! ${pscore} - ${cscore}</h2>`;
         rock.removeEventListener('click', buttonClicker);
         paper.removeEventListener('click', buttonClicker);
         scissors.removeEventListener('click', buttonClicker);
+        scoreBoard.style.backgroundColor = '#ffff79';
     } else if (cscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! Computer Wins!!! ${cscore} - ${pscore}</h2>`;
         rock.removeEventListener('click', buttonClicker);
         paper.removeEventListener('click', buttonClicker);
         scissors.removeEventListener('click', buttonClicker);
+        scoreBoard.style.backgroundColor = '#ffff79';
     }
 };
 
 let GAMESCORE = [0,0];
+const fortuneList = ['Some people dream of fortunes, others dream of cookies...',
+    'You will receive a fortune cookie',
+    'We dont know the future, but here’s a cookie',
+    'Actions speak louder than fortune cookies',
+    'Help! I am being held prisoner in a fortune cookie factory',
+    'Its about time I got out of that cookie',
+    'Some fortune cookies contain no fortune',
+    'This cookie contains 117 calories']
+
 
 function buttonClicker(e) {
     let playerSelection = e.target.id;
@@ -156,9 +164,12 @@ function game() {
     cbox = document.querySelector('.cbox')
     let scoreBoard = document.querySelector('.ticker');
     let gameMessage = document.querySelector('.info');
+    let index = Math.floor(Math.random() * fortuneList.length)
     let chooseText = `<h3>First to 5 Wins...</h3>
         <h3>Rock, Paper, or Scissors</h3>
         <h3>No Firearms!</h3>`;
+
+    scoreBoard.style.backgroundColor = '#ffffff';
     pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
     cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
     pbox.style.borderColor = 'var(--clr-neon)';
@@ -168,7 +179,7 @@ function game() {
         pbox.removeChild(pbox.firstChild);
         cbox.removeChild(cbox.firstChild);
         scoreBoard.removeChild(scoreBoard.firstChild);
-        scoreBoard.innerHTML = `<h2>Some people dream of fortunes, others dream of cookies...</h2>`;
+        scoreBoard.innerHTML = `<h2>${fortuneList[index]}</h2>`;
     };
 
     while (gameMessage.firstChild) {
