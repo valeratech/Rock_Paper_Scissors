@@ -28,6 +28,7 @@ function computerPlay() {
         cbox.style.borderColor = 'var(--clr-highlight)';
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
+    console.log(`COMP: ${typeList[random].toLowerCase()}`)
     return typeList[random].toLowerCase();
 };
 
@@ -60,6 +61,7 @@ function playerPlay(selection) {
         pbox.style.borderColor = 'var(--clr-highlight)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
+    console.log(`PLAY: ${selection}`)
 };
 
 function announceSelect(pSelect, cSelect) {
@@ -72,19 +74,20 @@ function announceSelect(pSelect, cSelect) {
     gameMessage.innerHTML = chooseText;
 };
 
-function playRound(computerSelection, playerSelection) {
+function playRound(playerSelection, computerSelection) {
+    console.log(`Computer: ${computerSelection} Player: ${playerSelection}`)
     if (computerSelection === 'rock' && playerSelection === 'scissors') {
-        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+        return `COMPUTER`;
     } else if (computerSelection === 'rock' && playerSelection === 'paper') {
-        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+        return `PLAYER`;
     } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
-        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+        return `PLAYER`;
     } else if (computerSelection === 'paper' && playerSelection === 'rock') {
-        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+        return `COMPUTER`;
     } else if (computerSelection === 'scissors' && playerSelection === 'rock') {
-        return `PLAYER WINS: ${playerSelection} beats ${computerSelection}`;
+        return `PLAYER`;
     } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
-        return `COMPUTER WINS: ${computerSelection} beats ${playerSelection}`;
+        return `COMPUTER`;
     } else {
         return "TIE";
     }
@@ -96,11 +99,12 @@ function tallyScore(result, start) {
     let scoreBoard = document.querySelector('.ticker');
     // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
     // Then increments each bby either 1 unless it results in a TIE
-    if (result.includes("PLAYER WINS")) {
+    console.log(result);
+    if (result === "PLAYER") {
         pscore++;
         scoreBoard.innerHTML = `<h2>PLAYER WINS!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
         return [pscore,cscore];
-    } else if (result.includes("COMPUTER WINS")) {
+    } else if (result === "COMPUTER") {
         cscore++;
         scoreBoard.innerHTML = `<h2>COMPUTER WINS!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
         return [pscore,cscore];
@@ -151,19 +155,26 @@ function game() {
     pbox = document.querySelector('.pbox')
     cbox = document.querySelector('.cbox')
     let scoreBoard = document.querySelector('.ticker');
+    let gameMessage = document.querySelector('.info');
+    let chooseText = `<h3>First to 5 Wins...</h3>
+        <h3>Rock, Paper, or Scissors</h3>
+        <h3>No Firearms!</h3>`;
+    pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
+    cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
+    pbox.style.borderColor = 'var(--clr-neon)';
+    cbox.style.borderColor = 'var(--clr-neon)';
+
     if (pbox.firstChild) {
         pbox.removeChild(pbox.firstChild);
         cbox.removeChild(cbox.firstChild);
         scoreBoard.removeChild(scoreBoard.firstChild);
-        scoreBoard.innerHTML = `<h2>Select "START" to Play Again!</h2>`;
+        scoreBoard.innerHTML = `<h2>Some people dream of fortunes, others dream of cookies...</h2>`;
     };
-    let gameMessage = document.querySelector('.info');
+
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
     };
 
-    let chooseText = `<h3>Let's Get Ready...</h3>
-        <h3>to RUMMMBBBLE!</h3>`;
     gameMessage.innerHTML = chooseText;
 
     rock = document.querySelector('#rock')
