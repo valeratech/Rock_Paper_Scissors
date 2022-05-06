@@ -19,11 +19,10 @@ body {
 }
 
 header {
-    background-color: #ff00f3;
     background-image: url('NashEquilibrium_RPS_2.jpg');
     background-size: cover;
-    /*padding: 400px 0;*/
-    height: 820px;
+    height: 700px;
+    width: 100%;
 }
 
 
