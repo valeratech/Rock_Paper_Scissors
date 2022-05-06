@@ -121,13 +121,6 @@ h3 {
 
 }
 
-/*--clr-neon: hsl(144, 100%, 54%);*/
-/*--clr-bg: hsl(323 21% 16%);*/
-/*--clr-retro: hsl(322, 100%, 50%);*/
-/*--clr-highlight: hsl(57, 100%, 63%);*/
-/*--clr-frost: hsl(192, 99%, 50%);*/
-
-
 .pbox, .cbox {
     width: 300px;
     height: 300px;
@@ -241,11 +234,6 @@ a:link {
     -1px -1px 0 #ffffff;
 
 }
-
-/*a:link {*/
-/*    text-decoration: none;*/
-/*    color: #F9FAF8;*/
-/*}*/
 
 a:visited {
     text-decoration: none;
