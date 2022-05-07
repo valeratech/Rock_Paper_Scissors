@@ -123,14 +123,14 @@ function checkWinner(score) {
         rock.removeEventListener('click', buttonClicker);
         paper.removeEventListener('click', buttonClicker);
         scissors.removeEventListener('click', buttonClicker);
-        scoreBoard.style.backgroundColor = '#ffff79';
+        scoreBoard.style.backgroundColor = '#00ff02';
     } else if (cscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! YOU LOSE!!! ${cscore} - ${pscore}</h2>`;
         rock.removeEventListener('click', buttonClicker);
         paper.removeEventListener('click', buttonClicker);
         scissors.removeEventListener('click', buttonClicker);
-        scoreBoard.style.backgroundColor = '#ffff79';
+        scoreBoard.style.backgroundColor = '#ff0017';
     }
 };
 
