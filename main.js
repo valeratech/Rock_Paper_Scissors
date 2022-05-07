@@ -97,14 +97,17 @@ function tallyScore(result, start) {
     // Then increments each bby either 1 unless it results in a TIE
     if (result === "PLAYER") {
         pscore++;
-        scoreBoard.innerHTML = `<h2>PLAYER WINS!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
+        scoreBoard.innerHTML = `<h2>PLAYER WINS!!!</h2>
+                                <h2>Score - Player: ${pscore}  |  Computer: ${cscore}</h2>`;
         return [pscore,cscore];
     } else if (result === "COMPUTER") {
         cscore++;
-        scoreBoard.innerHTML = `<h2>COMPUTER WINS!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
+        scoreBoard.innerHTML = `<h2>COMPUTER WINS!!!</h2>
+                                <h2>Score - Player: ${pscore} |  Computer: ${cscore}</h2>`;
         return [pscore,cscore];
     } else {
-        scoreBoard.innerHTML = `<h2>TIE!!! Score: Player: ${pscore} | Computer: ${cscore}</h2>`;
+        scoreBoard.innerHTML = `<h2>TIE!!!</h2>
+                                <h2>Score - Player: ${pscore}  |  Computer: ${cscore}</h2>`;
         return [pscore,cscore];
     }
 };
@@ -123,7 +126,7 @@ function checkWinner(score) {
         scoreBoard.style.backgroundColor = '#ffff79';
     } else if (cscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
-        scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! Computer Wins!!! ${cscore} - ${pscore}</h2>`;
+        scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! YOU LOSE!!! ${cscore} - ${pscore}</h2>`;
         rock.removeEventListener('click', buttonClicker);
         paper.removeEventListener('click', buttonClicker);
         scissors.removeEventListener('click', buttonClicker);
