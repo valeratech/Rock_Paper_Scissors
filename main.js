@@ -2,8 +2,8 @@ function computerPlay() {
     let typeList = ['Rock', 'Paper', 'Scissors'];
     // Uses the Math.Random to generate a random int and then use floor to return a whole num
     let random = Math.floor(Math.random() * typeList.length);
-    img = document.createElement('img');
-    cbox = document.querySelector('.cbox')
+    let img = document.createElement('img');
+    let cbox = document.querySelector('.cbox')
 
     if (typeList[random].toLowerCase() === 'rock') {
         img.className = 'icons';
@@ -28,15 +28,16 @@ function computerPlay() {
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
     return typeList[random].toLowerCase();
-};
+}
 
 function playerPlay(selection) {
-    img = document.createElement('img');
-    pbox = document.querySelector('.pbox')
+    let img = document.createElement('img');
+    let pbox = document.querySelector('.pbox')
+    let cbox = document.querySelector('.cbox')
     if (pbox.firstChild) {
         pbox.removeChild(pbox.firstChild);
         cbox.removeChild(cbox.firstChild);
-    };
+    }
     if (selection.toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -59,17 +60,16 @@ function playerPlay(selection) {
         pbox.style.borderColor = 'var(--clr-highlight)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
     }
-};
+}
 
 function announceSelect(pSelect, cSelect) {
     let gameMessage = document.querySelector('.info');
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
-    };
-    let chooseText = `<h3>Player chooses ${pSelect.toUpperCase()}!</h3>
+    }
+    gameMessage.innerHTML = `<h3>Player chooses ${pSelect.toUpperCase()}!</h3>
                       <h3>Computer chooses ${cSelect.toUpperCase()}!</h3>`;
-    gameMessage.innerHTML = chooseText;
-};
+}
 
 function playRound(playerSelection, computerSelection) {
     if (computerSelection === 'rock' && playerSelection === 'scissors') {
@@ -87,7 +87,7 @@ function playRound(playerSelection, computerSelection) {
     } else {
         return "TIE";
     }
-};
+}
 
 function tallyScore(result, start) {
     // Unpacks the array from the game function's starting score [0,0] and assignss it to pscore/cscore
@@ -110,12 +110,14 @@ function tallyScore(result, start) {
                                 <h2>Score - Player: ${pscore}  |  Computer: ${cscore}</h2>`;
         return [pscore,cscore];
     }
-};
+}
 
 function checkWinner(score) {
     let [pscore, cscore] = score;
     let scoreBoard = document.querySelector('.ticker');
-    let buttons = document.querySelectorAll(".button");
+    let rock = document.querySelector('#rock');
+    let paper = document.querySelector('#paper');
+    let scissors = document.querySelector('#scissors');
 
     if (pscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
@@ -132,7 +134,7 @@ function checkWinner(score) {
         scissors.removeEventListener('click', buttonClicker);
         scoreBoard.style.backgroundColor = '#ff0017';
     }
-};
+}
 
 let GAMESCORE = [0,0];
 const fortuneList = ['Some people dream of fortunes, others dream of cookies...',
@@ -149,21 +151,21 @@ function buttonClicker(e) {
     let playerSelection = e.target.id;
     let computerSelection = computerPlay();
     playerPlay(playerSelection);
-    gameResult = playRound(playerSelection, computerSelection);
+    let gameResult = playRound(playerSelection, computerSelection);
     announceSelect(playerSelection, computerSelection);
     // GAMESCORE keeps track of the score within an array
     GAMESCORE = tallyScore(gameResult, GAMESCORE);
     checkWinner(GAMESCORE);
-};
+}
 
 function setGlobal(){
     GAMESCORE = [0,0];
-};
+}
 
 function game() {
     setGlobal();
-    pbox = document.querySelector('.pbox')
-    cbox = document.querySelector('.cbox')
+    let pbox = document.querySelector('.pbox')
+    let cbox = document.querySelector('.cbox')
     let scoreBoard = document.querySelector('.ticker');
     let gameMessage = document.querySelector('.info');
     let index = Math.floor(Math.random() * fortuneList.length)
@@ -182,23 +184,23 @@ function game() {
         cbox.removeChild(cbox.firstChild);
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>${fortuneList[index]}</h2>`;
-    };
+    }
 
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
-    };
+    }
 
     gameMessage.innerHTML = chooseText;
 
-    rock = document.querySelector('#rock')
-    paper = document.querySelector('#paper')
-    scissors = document.querySelector('#scissors')
+    let rock = document.querySelector('#rock');
+    let paper = document.querySelector('#paper');
+    let scissors = document.querySelector('#scissors');
 
     rock.addEventListener('click', buttonClicker);
     paper.addEventListener('click', buttonClicker);
     scissors.addEventListener('click', buttonClicker);
 
-};
+}
 
 startButton = document.querySelector('.start');
 startButton.addEventListener('click', game);
