@@ -90,7 +90,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function tallyScore(result, start) {
-    // Unpacks the array from the game function's starting score [0,0] and assignss it to pscore/cscore
+    // Unpacks the array from the game function's starting score [0,0] and assigns it to pscore/cscore
     let [pscore, cscore] = start;
     let scoreBoard = document.querySelector('.ticker');
     // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
