@@ -12,6 +12,7 @@ function computerPlay() {
         cbox.appendChild(img);
         cbox.style.borderColor = 'var(--clr-retro)';
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-retro), 0 0 5em 0 var(--clr-retro)';
+        cbox.style.borderWidth = '10px';
     } else if (typeList[random].toLowerCase() === 'paper') {
         img.className = 'icons';
         img.src = 'Paper_Enhanced.jpg';
@@ -19,6 +20,7 @@ function computerPlay() {
         cbox.appendChild(img);
         cbox.style.borderColor = 'var(--clr-frost)';
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-frost), 0 0 5em 0 var(--clr-frost)';
+        cbox.style.borderWidth = '10px';
     } else if (typeList[random].toLowerCase() === 'scissors') {
         img.className = 'icons';
         img.src = 'Scissors_Enhance.jpg';
@@ -26,6 +28,7 @@ function computerPlay() {
         cbox.appendChild(img);
         cbox.style.borderColor = 'var(--clr-highlight)';
         cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
+        cbox.style.borderWidth = '10px';
     }
     return typeList[random].toLowerCase();
 }
@@ -45,6 +48,7 @@ function playerPlay(selection) {
         pbox.appendChild(img);
         pbox.style.borderColor = 'var(--clr-retro)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-retro), 0 0 5em 0 var(--clr-retro)';
+        pbox.style.borderWidth = '10px';
     } else if (selection.toLowerCase() === 'paper') {
         img.className = 'icons';
         img.src = 'Paper_Enhanced.jpg';
@@ -52,6 +56,7 @@ function playerPlay(selection) {
         pbox.appendChild(img);
         pbox.style.borderColor = 'var(--clr-frost)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-frost), 0 0 5em 0 var(--clr-frost)';
+        pbox.style.borderWidth = '10px';
     } else if (selection.toLowerCase() === 'scissors') {
         img.className = 'icons';
         img.src = 'Scissors_Enhance.jpg';
@@ -59,6 +64,7 @@ function playerPlay(selection) {
         pbox.appendChild(img);
         pbox.style.borderColor = 'var(--clr-highlight)';
         pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-highlight), 0 0 5em 0 var(--clr-highlight)';
+        pbox.style.borderWidth = '10px';
     }
 }
 
@@ -136,17 +142,6 @@ function checkWinner(score) {
     }
 }
 
-let GAMESCORE = [0,0];
-const fortuneList = ['Some people dream of fortunes, others dream of cookies...',
-    'You will receive a fortune cookie',
-    'We dont know the future, but here’s a cookie',
-    'Actions speak louder than fortune cookies',
-    'Help! I am being held prisoner in a fortune cookie factory',
-    'Its about time I got out of that cookie',
-    'Some fortune cookies contain no fortune',
-    'This cookie contains 117 calories']
-
-
 function buttonClicker(e) {
     let playerSelection = e.target.id;
     let computerSelection = computerPlay();
@@ -158,7 +153,18 @@ function buttonClicker(e) {
     checkWinner(GAMESCORE);
 }
 
+let GAMESCORE = [0,0];
+const fortuneList = ['Some people dream of fortunes, others dream of cookies...',
+    'You will receive a fortune cookie',
+    'We dont know the future, but here’s a cookie',
+    'Actions speak louder than fortune cookies',
+    'Help! I am being held prisoner in a fortune cookie factory',
+    'Its about time I got out of that cookie',
+    'Some fortune cookies contain no fortune',
+    'This cookie contains 117 calories'];
+
 function setGlobal(){
+    // function to reset the global variable back for the player and computer score
     GAMESCORE = [0,0];
 }
 
@@ -169,37 +175,46 @@ function game() {
     let scoreBoard = document.querySelector('.ticker');
     let gameMessage = document.querySelector('.info');
     let index = Math.floor(Math.random() * fortuneList.length)
+    // creates text when start button is pushed
     let chooseText = `<h3>First to 5 Wins...</h3>
         <h3>Rock, Paper, or Scissors</h3>
         <h3>No Firearms!</h3>`;
+    let rock = document.querySelector('#rock');
+    let paper = document.querySelector('#paper');
+    let scissors = document.querySelector('#scissors');
 
+    // The following code block:
+    // resets background color back to white after final winning/loser background color changes (red/green)
+    // resets border width to default 3 pixels
+    // resets colors to neon green
     scoreBoard.style.backgroundColor = '#ffffff';
     pbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
-    cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
     pbox.style.borderColor = 'var(--clr-neon)';
+    pbox.style.borderWidth = '3px';
+    cbox.style.boxShadow = 'inset 0 0 0.5em 0 var(--clr-neon), 0 0 1em 0 var(--clr-neon)';
     cbox.style.borderColor = 'var(--clr-neon)';
+    cbox.style.borderWidth = '3px';
 
+    // removes and resets content and code from the player/computer box
     if (pbox.firstChild) {
         pbox.removeChild(pbox.firstChild);
         cbox.removeChild(cbox.firstChild);
+        // resets scoreboard (ticker container) and randomly selects fortune from fortuneList
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>${fortuneList[index]}</h2>`;
     }
 
+    // when game starts, starting text "Select start to begin" is defined as true
+    // clears game text make way game text instruction-text (chooseText)
     while (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
     }
 
     gameMessage.innerHTML = chooseText;
 
-    let rock = document.querySelector('#rock');
-    let paper = document.querySelector('#paper');
-    let scissors = document.querySelector('#scissors');
-
     rock.addEventListener('click', buttonClicker);
     paper.addEventListener('click', buttonClicker);
     scissors.addEventListener('click', buttonClicker);
-
 }
 
 startButton = document.querySelector('.start');
