@@ -1,10 +1,15 @@
 function computerPlay() {
     let typeList = ['Rock', 'Paper', 'Scissors'];
-    // Uses the Math.Random to generate a random int and then use floor to return a whole num
+
+    // uses the Math.Random to generate a random int and then use floor to return a whole num
+    // uses whole number to randomly index typeList
     let random = Math.floor(Math.random() * typeList.length);
+
+    //create a container (img) to append image based on what is selected according to conditional block
     let img = document.createElement('img');
     let cbox = document.querySelector('.cbox')
 
+    // insert img container and border-box properties according to conditional block
     if (typeList[random].toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -37,10 +42,16 @@ function playerPlay(selection) {
     let img = document.createElement('img');
     let pbox = document.querySelector('.pbox')
     let cbox = document.querySelector('.cbox')
+
+    // uses a conditional to remove image from player and computer box everytime a click event from a play button occurs
+    // each click must remove previous img appended to container (pbox/cbox) otherwise images stack outside play boxes
+    // a conditional is used to check (and prevent typeError) if child element (img) is present
+    // otherwise typeError occurs when attempting to remove a non-existing element at the start of game
     if (pbox.firstChild) {
         pbox.removeChild(pbox.firstChild);
         cbox.removeChild(cbox.firstChild);
     }
+
     if (selection.toLowerCase() === 'rock') {
         img.className = 'icons';
         img.src = 'Rock_Enhanced.jpg';
@@ -70,7 +81,10 @@ function playerPlay(selection) {
 
 function announceSelect(pSelect, cSelect) {
     let gameMessage = document.querySelector('.info');
-    while (gameMessage.firstChild) {
+
+    // uses a conditional to remove the middle info box between game-boxes so new information can be updated
+    // information includes player choices and selections (rock, paper or scissors)
+    if (gameMessage.firstChild) {
         gameMessage.removeChild(gameMessage.firstChild);
     }
     gameMessage.innerHTML = `<h3>Player chooses ${pSelect.toUpperCase()}!</h3>
@@ -99,6 +113,7 @@ function tallyScore(result, start) {
     // Unpacks the array from the game function's starting score [0,0] and assigns it to pscore/cscore
     let [pscore, cscore] = start;
     let scoreBoard = document.querySelector('.ticker');
+
     // Searches the string for the return results from the playRound function for either PLAYER WINS or COMPUTER WINS
     // Then increments each bby either 1 unless it results in a TIE
     if (result === "PLAYER") {
@@ -119,12 +134,15 @@ function tallyScore(result, start) {
 }
 
 function checkWinner(score) {
+    // unpacks argument score and assigns it to pscore/csore - the results from the tallyScore function
     let [pscore, cscore] = score;
     let scoreBoard = document.querySelector('.ticker');
     let rock = document.querySelector('#rock');
     let paper = document.querySelector('#paper');
     let scissors = document.querySelector('#scissors');
 
+    // after a winner is declared play-buttons need to be deactivated using removeEventListener.
+    // winner/loser background-color (red/green) is also updated
     if (pscore === 5) {
         scoreBoard.removeChild(scoreBoard.firstChild);
         scoreBoard.innerHTML = `<h2>GAME-SET-MATCH! Player Wins!!! ${pscore} - ${cscore}</h2>`;
